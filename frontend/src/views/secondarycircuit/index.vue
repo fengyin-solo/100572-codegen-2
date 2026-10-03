@@ -84,7 +84,7 @@ import type { EntryRow } from '@/data/types'
 const meta = moduleMeta('secondarycircuit')
 const columns = ["检查编号", "所属间隔", "回路类别", "端子排编号", "绝缘电阻", "检查人", "检查日期", "回路状态"]
 const actions = ["提交检查", "判定合格", "提出整改"]
-const statuses = ["待检查", "检查中", "检查合格", "需整改"]
+const statuses = ["待补录", "待检查", "检查中", "检查合格", "需整改"]
 const stats = [{"label": "待检查回路", "value": 0}, {"label": "检查合格回路", "value": 0}, {"label": "需整改回路", "value": 0}]
 
 const rows = ref<EntryRow[]>([])

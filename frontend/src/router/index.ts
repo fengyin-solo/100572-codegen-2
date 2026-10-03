@@ -6,6 +6,7 @@ const Protectiondevice = () => import('@/views/protectiondevice/index.vue')
 const Settingvalue = () => import('@/views/settingvalue/index.vue')
 const Settingcheck = () => import('@/views/settingcheck/index.vue')
 const Secondarycircuit = () => import('@/views/secondarycircuit/index.vue')
+const Drawingborrow = () => import('@/views/drawingborrow/index.vue')
 const Relaytest = () => import('@/views/relaytest/index.vue')
 const Faultrecord = () => import('@/views/faultrecord/index.vue')
 const Tripstat = () => import('@/views/tripstat/index.vue')
@@ -29,6 +30,7 @@ const router = createRouter({
     { path: '/settingvalue', name: 'settingvalue', component: Settingvalue },
     { path: '/settingcheck', name: 'settingcheck', component: Settingcheck },
     { path: '/secondarycircuit', name: 'secondarycircuit', component: Secondarycircuit },
+    { path: '/drawingborrow', name: 'drawingborrow', component: Drawingborrow },
     { path: '/relaytest', name: 'relaytest', component: Relaytest },
     { path: '/faultrecord', name: 'faultrecord', component: Faultrecord },
     { path: '/tripstat', name: 'tripstat', component: Tripstat },

@@ -47,6 +47,8 @@ npm run build
 | 定值整定 | `settingvalue` | 定值单 | 定值单号、所属装置、定值项目 |
 | 定值核对 | `settingcheck` | 核对记录 | 核对编号、所属变电站、装置名称 |
 | 二次回路检查 | `secondarycircuit` | 回路检查记录 | 检查编号、所属间隔、回路类别 |
+| 二次图纸借阅台账 | `drawingborrow` | 借阅记录 | 借阅编号、所属变电站、卷册编号、应还日期 |
+| 图纸催还单 | `drawingurge` | 催还单 | 催还单号、关联借阅编号、应还日期、办结结论 |
 | 保护校验 | `relaytest` | 校验记录 | 校验编号、装置名称、校验项目 |
 | 故障录波 | `faultrecord` | 录波记录 | 录波编号、故障线路、故障类型 |
 | 保护动作统计 | `tripstat` | 动作统计 | 统计编号、所属线路、动作次数 |
@@ -68,4 +70,7 @@ npm run build
 - 字段、状态、动作与流转目标集中在 `frontend/src/data/modules.ts`；示例数据在
   `frontend/src/data/seed.ts`。
 - 状态流转只允许在 `local-service.ts` 里改，页面组件不做业务判断。
+- 图纸借阅的期限判定、批量催还、归还核销与跨模块同步规则集中在
+  `frontend/src/api/drawing-borrow.ts`（借阅期限按专业室规则判定；应还日期冲突时以借条原件为准；
+  催还办结结论同步到二次回路检查待补录清单），页面同样只负责调用。
 - 想回到初始数据：清掉浏览器里 `substation-protection:entries` 这一项，或调用 `resetModule(模块)`。

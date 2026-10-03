@@ -35,3 +35,18 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .error-text { color: #b42318; }
 .status-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
 .legend-item { background: #eef2f7; border-radius: 999px; padding: 2px 10px; }
+.panel { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+.panel h3 { margin: 0 0 8px; font-size: 14px; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.panel-head h3 { margin: 0; }
+.panel-hint { color: var(--muted); font-size: 12px; margin: 8px 0 0; }
+.form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+.form-item span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 2px; }
+.form-item input, .form-item select, .filter-item input { width: 100%; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; }
+.form-submit { display: flex; align-items: flex-end; }
+.group-title { margin: 14px 0 6px; font-size: 13px; }
+.check-col { width: 34px; text-align: center; }
+.overdue-badge { color: #b42318; font-weight: 600; }
+.ok-text { color: #067647; }
+.inline-form { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); font-size: 13px; }
+.inline-form input { padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; }
