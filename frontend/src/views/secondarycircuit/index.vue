@@ -63,6 +63,32 @@
       </tbody>
     </table>
 
+    <section class="backlog-panel">
+      <h3 class="backlog-title">待补录清单（由二次图纸资料催还办结结论同步）</h3>
+      <table class="data-table">
+        <thead>
+          <tr><th>变电站</th><th>图册</th><th>借阅人</th><th>待补录内容</th><th>生成时间</th><th>状态</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in backlog" :key="item.id">
+            <td>{{ item.substation }}</td>
+            <td>{{ item.volumeName }}</td>
+            <td>{{ item.borrower }}</td>
+            <td>{{ item.content }}</td>
+            <td>{{ item.createdAt }}</td>
+            <td>{{ item.status }}</td>
+            <td class="row-actions">
+              <button v-if="item.status === '待补录'" class="link" type="button" @click="clearItem(item.id)">补录核销</button>
+              <span v-else>{{ item.clearedAt }} 已核销</span>
+            </td>
+          </tr>
+          <tr v-if="!backlog.length">
+            <td colspan="7" class="empty-state">暂无催还办结同步来的待补录项</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
     <footer class="page-foot">
       <span>共 {{ total }} 条二次回路检查记录</span>
       <span v-if="errorMessage" class="error-text">{{ errorMessage }}</span>
@@ -79,7 +105,27 @@ import {
   moduleMeta,
   runAction as applyAction,
 } from '@/api/local-service'
+import {
+  clearBacklogItem,
+  listBacklog,
+} from '@/api/drawing-service'
+import type { CircuitBacklogItem } from '@/data/drawing-types'
 import type { EntryRow } from '@/data/types'
+
+const backlog = ref<CircuitBacklogItem[]>([])
+
+function loadBacklog() {
+  backlog.value = listBacklog()
+}
+
+function clearItem(id: number) {
+  const result = clearBacklogItem(id)
+  if (!result.ok) {
+    errorMessage.value = result.message
+    return
+  }
+  loadBacklog()
+}
 
 const meta = moduleMeta('secondarycircuit')
 const columns = ["检查编号", "所属间隔", "回路类别", "端子排编号", "绝缘电阻", "检查人", "检查日期", "回路状态"]
@@ -133,5 +179,13 @@ function reload() {
   }
 }
 
-onMounted(reload)
+onMounted(() => {
+  reload()
+  loadBacklog()
+})
 </script>
+
+<style scoped>
+.backlog-panel { margin-top: 18px; background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+.backlog-title { font-size: 14px; margin: 0 0 10px; }
+</style>
